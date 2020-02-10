@@ -1,4 +1,4 @@
-from MyTicker import MyContract
+from MyTicker import MyTicker
 
 
 class MyWatchlist:

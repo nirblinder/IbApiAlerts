@@ -46,8 +46,7 @@ def main():
     app.connect("127.0.0.1", 4001, 0)
 
     for ticker in watch_1.getTickers():
-        app.reqRealTimeBars(ticker.ticker_id, contract, 0, "TRADES", 0, [])
-        #app.reqMktData(i, contract, "", False, False, [])
+        app.reqRealTimeBars(ticker.id, ticker, 0, "TRADES", 0, [])
 
     app.run()
 
