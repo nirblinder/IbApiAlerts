@@ -1,6 +1,5 @@
 class MyBar:
-    def __init__(self, time, open, low, high, close, volume):
-        self.time = time
+    def __init__(self, open, low, high, close, volume):
         self.open = open # ?
         self.low = low
         self.high = high
