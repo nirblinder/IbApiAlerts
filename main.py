@@ -45,10 +45,15 @@ def main():
     app = MainApp()
     app.connect("127.0.0.1", 4001, 0)
 
-    durationString = str(int((datetime.now() - datetime.now().replace(hour=14, minute=0, second=0, microsecond=0)).total_seconds())) + " S"
+    # build duration string in seconds from today's start to now
+    now = datetime.now()
+    start = now.replace(hour=0, minute=0, second=0, microsecond=0)
+    duration = int((now-start).total_seconds())
+    durationString = str(duration) + " S"
+
+    print(durationString)
 
     for ticker in watch_1.getTickers():
-        print(durationString)
         app.reqHistoricalData(ticker.id, ticker, "", durationString, "1 min", "TRADES", 0, 1, True, [])
 
     app.run()
