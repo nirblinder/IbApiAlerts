@@ -2,6 +2,7 @@ from ibapi.client import EClient
 from ibapi.wrapper import EWrapper
 from ibapi.ticktype import TickTypeEnum
 from datetime import datetime
+from datetime import timedelta
 from MyWatchlist import  MyWatchlist
 
 
@@ -20,8 +21,7 @@ class MainApp(EWrapper, EClient):
         print("historicalUpdate ", reqId, " Date: ", bar.date, "Open: ", bar.open, "Close: ", bar.close, "Low: ", bar.low, "High: ", bar.high, "Volume: ", bar.volume)
 
     def historicalDataEnd(self, reqId, startDate, endDate):
-        pass
-        #print("historicalDataEnd - "+str(reqId)+" from "+startDate+" to "+endDate)
+        print("historicalDataEnd - " + str(reqId) + " from " + startDate + " to " + endDate)
 
     def currentTime(self, time):
         print(datetime.fromtimestamp(time))
@@ -45,8 +45,11 @@ def main():
     app = MainApp()
     app.connect("127.0.0.1", 4001, 0)
 
+    durationString = str(int((datetime.now() - datetime.now().replace(hour=14, minute=0, second=0, microsecond=0)).total_seconds())) + " S"
+
     for ticker in watch_1.getTickers():
-        app.reqRealTimeBars(ticker.id, ticker, 0, "TRADES", 0, [])
+        print(durationString)
+        app.reqHistoricalData(ticker.id, ticker, "", durationString, "1 min", "TRADES", 0, 1, True, [])
 
     app.run()
 
