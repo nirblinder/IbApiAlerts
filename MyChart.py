@@ -2,22 +2,30 @@ from MyTicker import MyTicker
 from MyBar import MyBar
 
 class MyChart:
-    bar_size = 1
-    barsHistory = []
 
-    def __init__(self, bar_size, ticker):
-        self.bar_size = bar_size
+    def __init__(self, id, barsize, ticker):
+        self._id = id
+        self._barsize = barsize
         self._ticker = ticker
+        self._bars = []
 
-    def update(self, bar):
-        pass
+    @property
+    def id(self):
+        return self._id
 
     @property
     def ticker(self):
         return self._ticker
 
+    @property
+    def bars(self):
+        return self._bars
 
+    @property
+    def barsize(self):
+        return self._barsize
 
-
+    def update(self, bar):
+        self._bars.append(bar)
 
 
