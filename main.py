@@ -2,8 +2,9 @@ from ibapi.client import EClient
 from ibapi.wrapper import EWrapper
 from ibapi.ticktype import TickTypeEnum
 from datetime import datetime
-from datetime import timedelta
 from MyWatchlist import  MyWatchlist
+from MyLayout import MyLayout
+from MyChart import MyChart
 
 
 class MainApp(EWrapper, EClient):
@@ -42,21 +43,36 @@ def main():
     # create watchlist from csv file
     watch_1 = MyWatchlist()
 
-    app = MainApp()
-    app.connect("127.0.0.1", 4001, 0)
+    # create charts 1min and 5min for each ticker in watchlist
+    layout_1 = MyLayout()
+
+    # add 1min and 5min charts to layout foreach ticker in watchlist
+    for ticker in watch_1.getTickers():
+        chart1min = MyChart(1, ticker)
+        layout_1.addChart(chart1min)
+        chart5min = MyChart(5, ticker)
+        layout_1.addChart(chart5min)
+
+    #print(layout_1.getNumOfCharts())
+    layout_1.print()
+
+    # setup the api app and connect
+    #app = MainApp()
+    #app.connect("127.0.0.1", 4001, 0)
 
     # build duration string in seconds from today's start to now
+    # on start-up the charts will populate with data from start of the day
     now = datetime.now()
-    start = now.replace(hour=0, minute=0, second=0, microsecond=0)
+    start = now.replace(hour=8, minute=0, second=0, microsecond=0)
     duration = int((now-start).total_seconds())
     durationString = str(duration) + " S"
 
-    print(durationString)
+    # request hostorical and realtime data from all ticker in the watchlist
+    #for ticker in watch_1.getTickers():
+        #app.reqHistoricalData(ticker.id, ticker, "", durationString, "1 min", "TRADES", 0, 1, True, [])
 
-    for ticker in watch_1.getTickers():
-        app.reqHistoricalData(ticker.id, ticker, "", durationString, "1 min", "TRADES", 0, 1, True, [])
-
-    app.run()
+    # run the api app
+    #app.run()
 
 if __name__ == "__main__":
     main()
