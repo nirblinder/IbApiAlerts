@@ -16,15 +16,15 @@ class MainApp(EWrapper, EClient):
         #print("Error: ", reqId, " ", errorCode, " ", errorString)
 
     def historicalData(self, reqId, bar):
-        layout_1.updateChart(reqId, bar)
-        #print("historicalData ", reqId, " Date: ", bar.date, "Open: ", bar.open, "Close: ", bar.close, "Low: ", bar.low, "High: ", bar.high, "Volume: ", bar.volume)
+        #layout_1.updateChart(reqId, bar)
+        print("historicalData ", reqId, " Date: ", bar.date, "Open: ", bar.open, "Close: ", bar.close, "Low: ", bar.low, "High: ", bar.high, "Volume: ", bar.volume)
 
     def historicalDataUpdate(self, reqId, bar):
         print("historicalUpdate ", reqId, " Date: ", bar.date, "Open: ", bar.open, "Close: ", bar.close, "Low: ", bar.low, "High: ", bar.high, "Volume: ", bar.volume)
 
     def historicalDataEnd(self, reqId, startDate, endDate):
-        pass
-        #print("historicalDataEnd - " + str(reqId) + " from " + startDate + " to " + endDate)
+        #pass
+        print("historicalDataEnd - " + str(reqId) + " from " + startDate + " to " + endDate)
 
     def currentTime(self, time):
         print(datetime.fromtimestamp(time))
@@ -56,7 +56,7 @@ def main():
     # build duration string in seconds from today's start to now
     # on start-up the charts will populate with data from start of the day
     now = datetime.now()
-    start = now.replace(hour=0, minute=0, second=0, microsecond=0)
+    start = now.replace(hour=14, minute=0, second=0, microsecond=0)
     duration = int((now-start).total_seconds())
     durationString = str(duration) + " S"
 

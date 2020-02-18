@@ -16,5 +16,3 @@ class MyTicker(Contract):
     def id(self):
         return self._id
 
-    def getSymbol(self):
-        return self.symbol
