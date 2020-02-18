@@ -1,10 +1,8 @@
 from ibapi.client import EClient
 from ibapi.wrapper import EWrapper
-from ibapi.ticktype import TickTypeEnum
 from datetime import datetime
-from MyWatchlist import  MyWatchlist
+from MyWatchlist import MyWatchlist
 from MyLayout import MyLayout
-from MyChart import MyChart
 
 
 class MainApp(EWrapper, EClient):
@@ -16,30 +14,13 @@ class MainApp(EWrapper, EClient):
         #print("Error: ", reqId, " ", errorCode, " ", errorString)
 
     def historicalData(self, reqId, bar):
-        #layout_1.updateChart(reqId, bar)
-        print("historicalData ", reqId, " Date: ", bar.date, "Open: ", bar.open, "Close: ", bar.close, "Low: ", bar.low, "High: ", bar.high, "Volume: ", bar.volume)
+        layout_1.updateChart(reqId, bar)
+        #print("historicalData ", reqId, " Date: ", bar.date, "Open: ", bar.open, "Close: ", bar.close, "Low: ", bar.low, "High: ", bar.high, "Volume: ", bar.volume)
 
     def historicalDataUpdate(self, reqId, bar):
-        print("historicalUpdate ", reqId, " Date: ", bar.date, "Open: ", bar.open, "Close: ", bar.close, "Low: ", bar.low, "High: ", bar.high, "Volume: ", bar.volume)
+        layout_1.updateChart(reqId, bar)
+        #print("historicalUpdate ", reqId, " Date: ", bar.date, "Open: ", bar.open, "Close: ", bar.close, "Low: ", bar.low, "High: ", bar.high, "Volume: ", bar.volume)
 
-    def historicalDataEnd(self, reqId, startDate, endDate):
-        #pass
-        print("historicalDataEnd - " + str(reqId) + " from " + startDate + " to " + endDate)
-
-    def currentTime(self, time):
-        print(datetime.fromtimestamp(time))
-
-    def tickPrice(self, reqId, tickType, price, attrib):
-        if TickTypeEnum.to_str(tickType) == "LAST":
-            print("Tick Price. Ticker Id:", reqId, "tickType:", TickTypeEnum.to_str(tickType), "Price:", price)
-
-    def tickSize(self, reqId, tickType, size):
-        if TickTypeEnum.to_str(tickType) == "LAST_SIZE":
-            print("Tick Size. Ticker Id:", reqId, "tickType:", TickTypeEnum.to_str(tickType), "Size:", size)
-
-    def realtimeBar(self, reqId, date, open, high, low, close, volume, WAP, count):
-        print("Real-time Bar. Ticker Id:", reqId, "date:", datetime.fromtimestamp(date), "Close:", close, "Volume:", volume)
-        # updateTicker
 
 def main():
     # create watchlist from csv file
@@ -56,7 +37,7 @@ def main():
     # build duration string in seconds from today's start to now
     # on start-up the charts will populate with data from start of the day
     now = datetime.now()
-    start = now.replace(hour=14, minute=0, second=0, microsecond=0)
+    start = now.replace(hour=22, minute=30, second=0, microsecond=0)
     duration = int((now-start).total_seconds())
     durationString = str(duration) + " S"
 

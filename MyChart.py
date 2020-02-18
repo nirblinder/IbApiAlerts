@@ -1,5 +1,5 @@
 from MyTicker import MyTicker
-from MyBar import MyBar
+from datetime import datetime
 
 class MyChart:
 
@@ -8,6 +8,7 @@ class MyChart:
         self._barsize = barsize
         self._ticker = ticker
         self._bars = []
+        self.last_minute = -1
 
     @property
     def id(self):
@@ -26,6 +27,16 @@ class MyChart:
         return self._barsize
 
     def update(self, bar):
-        self._bars.append(bar)
+        # get minute of current bar
+        curr_minute = datetime.strptime(bar.date, '%Y%m%d %H:%M:%S').minute
+
+        # if current bar minute is different than last bar, append the current bar
+        # otherwise, update the last bar
+        if curr_minute != self.last_minute:
+            self._bars.append(bar)
+        else:
+            self._bars[-1] = bar
+
+        self.last_minute = curr_minute
 
 
