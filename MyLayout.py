@@ -1,5 +1,5 @@
 from MyChart import MyChart
-from MyWatchlist import MyWatchlist
+
 
 class MyLayout:
 
@@ -17,7 +17,7 @@ class MyLayout:
         self._charts[id].update(bar)
 
     def getNumOfCharts(self):
-        return str(len(self._charts))
+        return len(self._charts)
 
     def print(self):
         for chart in self._charts:

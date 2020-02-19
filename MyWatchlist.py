@@ -1,5 +1,6 @@
 from MyTicker import MyTicker
 
+
 class MyWatchlist:
     file = 'watchlist.csv'
 

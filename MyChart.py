@@ -1,6 +1,7 @@
 from MyTicker import MyTicker
 from datetime import datetime
 
+
 class MyChart:
 
     def __init__(self, id, barsize, ticker):
@@ -38,5 +39,3 @@ class MyChart:
             self._bars[-1] = bar
 
         self.last_minute = curr_minute
-
-

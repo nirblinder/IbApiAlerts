@@ -15,11 +15,9 @@ class MainApp(EWrapper, EClient):
 
     def historicalData(self, reqId, bar):
         layout_1.updateChart(reqId, bar)
-        #print("historicalData ", reqId, " Date: ", bar.date, "Open: ", bar.open, "Close: ", bar.close, "Low: ", bar.low, "High: ", bar.high, "Volume: ", bar.volume)
 
     def historicalDataUpdate(self, reqId, bar):
         layout_1.updateChart(reqId, bar)
-        #print("historicalUpdate ", reqId, " Date: ", bar.date, "Open: ", bar.open, "Close: ", bar.close, "Low: ", bar.low, "High: ", bar.high, "Volume: ", bar.volume)
 
 
 def main():
@@ -37,7 +35,7 @@ def main():
     # build duration string in seconds from today's start to now
     # on start-up the charts will populate with data from start of the day
     now = datetime.now()
-    start = now.replace(hour=22, minute=30, second=0, microsecond=0)
+    start = now.replace(hour=23, minute=30, second=0, microsecond=0)
     duration = int((now-start).total_seconds())
     durationString = str(duration) + " S"
 

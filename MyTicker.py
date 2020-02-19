@@ -1,5 +1,6 @@
 from ibapi.contract import Contract
 
+
 class MyTicker(Contract):
     def __init__(self, id, symbol, primaryExchange):
         Contract.__init__(self)
