@@ -1,4 +1,5 @@
 from MyTicker import MyTicker
+from MyBar import MyBar
 from datetime import datetime
 
 
@@ -35,6 +36,8 @@ class MyChart:
         # otherwise, update the last bar
         if curr_minute != self.last_minute:
             self._bars.append(bar)
+            if bar.isGreen() is True:
+                print("Green")
         else:
             self._bars[-1] = bar
 
