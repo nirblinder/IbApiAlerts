@@ -1,15 +1,9 @@
-from MyBar import MyBar
+import MyBar
 
-class Engulfing5min:
 
-    def __init__(self):
+def run(chart):
+    if len(chart.bars) > 1:
+        if MyBar.isLarger(chart.bars[-2], 0.75) is True and MyBar.isLarger(chart.bars[-1], 0.75) is True and ((MyBar.isGreen(chart.bars[-2]) is True and MyBar.isRed(chart.bars[-1]) is True) or (MyBar.isRed(chart.bars[-2]) is True and MyBar.isGreen(chart.bars[-1]) is True)):
+            print(chart.ticker.symbol,  "|", chart.bars[-1].date,  "|", chart.barsize, "engulfing |", str(chart.bars[-1].open))
+    else:
         pass
-
-    def update(self, bar_previous, bar_current):
-        if bar_previous.isGreen() is True and bar_current.isRed() is True:
-            self.alert()
-        else:
-            pass
-
-    def alert(self):
-        print("5 min engulfing")

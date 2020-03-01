@@ -1,11 +1,13 @@
-from ibapi.wrapper import BarData
+# from ibapi.wrapper import BarData
 
-class MyBar(BarData):
 
-    def isGreen(self):
-        return True if (self.open < self.close) else False
+def isGreen(bar):
+    return True if (bar.open < bar.close) else False
 
-    def isRed(self):
-        return True if (self.open > self.close) else False
+def isRed(bar):
+    return True if (bar.open > bar.close) else False
+
+def isLarger(bar, percent):
+    return True if (abs(bar.open-bar.close)/bar.open*100 > percent) else False
 
 

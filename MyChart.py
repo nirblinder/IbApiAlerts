@@ -1,5 +1,8 @@
 from MyTicker import MyTicker
-from MyBar import MyBar
+import MyBar
+from Strategies import StrategiesBarClose
+from Strategies import StrategiesBarRealTime
+
 from datetime import datetime
 
 
@@ -33,12 +36,12 @@ class MyChart:
         curr_minute = datetime.strptime(bar.date, '%Y%m%d %H:%M:%S').minute
 
         # if current bar minute is different than last bar, append the current bar
-        # otherwise, update the last bar
+        # otherwise, update(override) the last bar
         if curr_minute != self.last_minute:
             self._bars.append(bar)
-            if bar.isGreen() is True:
-                print("Green")
+            StrategiesBarClose.run(self)
         else:
             self._bars[-1] = bar
+            StrategiesBarRealTime.run(self)
 
         self.last_minute = curr_minute
