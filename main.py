@@ -11,8 +11,8 @@ class MainApp(EWrapper, EClient):
         EClient.__init__(self, self)
 
     def error(self, reqId, errorCode, errorString):
-        pass
-        #print("Error: ", reqId, " ", errorCode, " ", errorString)
+        #pass
+        print("Error: ", reqId, " ", errorCode, " ", errorString)
 
     def historicalData(self, reqId, bar):
         #print("req: ", reqId, " Date: ", bar.date, ", Open: ", bar.open, ", Close: ", bar.close)
@@ -37,10 +37,9 @@ def main():
     # build duration string in seconds from today's start to now
     # on start-up the charts will populate with data from start of the day
     now = datetime.now(tz=pytz.timezone('US/Eastern'))
-    start = now.replace(hour=0, minute=30, second=0, microsecond=0)
+    start = now.replace(hour=4, minute=00, second=0, microsecond=0)
     duration = int((now-start).total_seconds())
     durationString = str(duration) + " S"
-    #print(durationString)
     # request historical and realtime data from all ticker in the watchlist
     for chart in layout_1.charts:
         app.reqHistoricalData(chart.id, chart.ticker, "", durationString, chart.barsize, "TRADES", 0, 1, True, [])
